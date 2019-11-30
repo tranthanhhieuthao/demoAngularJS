@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html >
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+<script src="https://code.angularjs.org/1.4.5/angular-route.js"></script>
+<script src="js/angulardemo.js"></script>
+<style>
+table, td {
+	border: 1px solid grey;
+	border-collapse: collapse;
+	padding: 5px;
+}
+</style>
+</head>
+<body>
+	<div ng-app="demoApp" ng-controller="demoCtrl">
+	
+		<input type="button" value="Create new Student" ng-click="">
+		<table>
+			<tr>
+				<td>Name</td>
+				<td>Age</td>
+				<td>Country</td>
+				<td>Action</td>
+			</tr>
+			<tr ng-repeat="x in inforStudent">
+				<td>{{x.name}}</td>
+				<td>{{x.age}}</td>
+				<td>{{x.country}}</td>
+				<td><input type="button" value="Delete" ng-click="delete(x.id)">
+					<a href="index/detail">Detail</a> <input
+					type="button" value="Edit" ng-click=""></td>
+			</tr>
+		</table>
+
+	</div>
+</body>
+</html>
