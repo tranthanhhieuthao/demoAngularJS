@@ -3,22 +3,33 @@
  */
 var app = angular.module('demoApp', ["ngRoute"]);
 
-app.config(function($routeProvider){
+app.config(function($routeProvider,$locationProvider){
 	$routeProvider
-	.when('/index',{
-		controller: 'demoCtrl',
-		template :'index.html'
+	
+	.when('/detailStudent',{	
+		controller: 'detailCtrl',
+		templateUrl:'./detailStudent.html'
 	})
-	.when('/index/detail',{	
+	.when('/listStudent',{	
 		controller: 'demoCtrl',
-		template:'detail.html'
+		templateUrl:'/listStudent.html'
 	})
+	.otherwise('/',{
+		template:'./index.html'
+	});
+	
 }
 	
 );
 
+app.controller("detailCtrl",function( $scope, $location){
+	$location.path('/detailStudent');
+	$scope.message="hello word";
+})
 
-app.controller("demoCtrl",function( $scope) {
+
+app.controller("demoCtrl",function( $scope, $location) {
+	$location.path('/listStudent');
 	
 	$scope.delete = function (id) {
 		 

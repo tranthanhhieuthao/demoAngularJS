@@ -1,41 +1,159 @@
 <!DOCTYPE html>
-<html >
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title></title>
+
 <script
 	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
 <script src="https://code.angularjs.org/1.4.5/angular-route.js"></script>
-<script src="js/angulardemo.js"></script>
-<style>
-table, td {
-	border: 1px solid grey;
-	border-collapse: collapse;
-	padding: 5px;
-}
-</style>
-</head>
-<body>
-	<div ng-app="demoApp" ng-controller="demoCtrl">
-	
-		<input type="button" value="Create new Student" ng-click="">
-		<table>
-			<tr>
-				<td>Name</td>
-				<td>Age</td>
-				<td>Country</td>
-				<td>Action</td>
-			</tr>
-			<tr ng-repeat="x in inforStudent">
-				<td>{{x.name}}</td>
-				<td>{{x.age}}</td>
-				<td>{{x.country}}</td>
-				<td><input type="button" value="Delete" ng-click="delete(x.id)">
-					<a href="index/detail">Detail</a> <input
-					type="button" value="Edit" ng-click=""></td>
-			</tr>
-		</table>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+	crossorigin="anonymous">
 
-	</div>
+</head>
+
+<body ng-app="demoApp">
+	<h1>Angular Routing Demo</h1>
+
+
+	<a href="#/listStudent">clickme</a>
+	<a href="#/detailStudent">clickme</a>
+	<div ng-view></div>
+
+	<!--     <script>
+        var app = angular.module('ngRoutingDemo', ['ngRoute']);
+
+        app.config(function ($routeProvider) {
+             
+            $routeProvider.when('/login', {
+                templateUrl: './login.html',
+                controller: 'loginController'
+            }).when('/student/:username', {
+                templateUrl: './student.html',
+                controller: 'studentController'
+            })
+
+        app.controller("loginController", function ($scope, $location) {
+           
+            $scope.authenticate = function (username) {
+                // write authentication code here.. 
+
+                $location.path('/student/' + username);
+
+            };
+
+        });
+
+        app.controller("studentController", function ($scope, $routeParams) {
+            $scope.username = $routeParams.username;
+        });
+
+    });
+    </script> -->
+
+	<script>
+	var app = angular.module('demoApp', ["ngRoute"]);
+
+	app.config(function($routeProvider,$locationProvider){
+		$routeProvider
+		.when('/detailStudent',{	
+			controller: 'detailCtrl',
+			templateUrl:'./detailStudent.html'
+		})
+		.when('/listStudent',{	
+			controller: 'demoCtrl',
+			templateUrl:'./listStudent.html'
+		})
+		.otherwise('/',{
+			template:'./index.html'
+		});
+		
+	}
+		
+	);
+
+	app.controller("detailCtrl",function( $scope, $location){
+		$location.path('/detailStudent');
+		$scope.message="hello word";
+	})
+
+
+	app.controller("demoCtrl",function( $scope, $location) {
+		$location.path('/listStudent');
+		
+		$scope.delete = function (id) {
+			 
+			for (i in $scope.inforStudent) {
+			 
+			if ($scope.inforStudent[i].id == id) {
+			 
+			$scope.inforStudent.splice(i, 1);
+			 	 
+			}	 
+			}	 
+			}
+		
+		$scope.inforStudent = [ {
+			id:1,
+			name : 'Hieu',
+			age:18,
+			country : 'Nghe An'
+		}, {
+			id:2,
+			name : 'Thao',
+			age:20,
+			country : 'Ha Noi'
+		}, {
+			id:3,
+			name : 'Kai',
+			age:19,
+			country : 'Ha Tinh'
+		},{
+			id:4,
+			name : 'Linh Chi',
+			age:18,
+			country : 'Nghe An'
+		},{
+			id:5,
+			name : 'Xuan Hai',
+			age:18,
+			country : 'Ha Tinh'
+		},{
+			id:6,
+			name : 'Thanh Quang',
+			age:18,
+			country : 'TPHCM'
+		},{
+			id:7,
+			name : 'Anh Minh',
+			age:18,
+			country : 'Nghe An'
+		},{
+			id:8,
+			name : 'Cong Anh',
+			age:18,
+			country : 'Vinh'
+		},{
+			id:9,
+			name : 'Xuan Quan',
+			age:18,
+			country : 'Vung Tau'
+		},{
+			id:10,
+			name : 'Tran Thien',
+			age:18,
+			country : 'Ha Noi'
+		},{
+			id:11,
+			name : 'Bao An',
+			age:18,
+			country : 'Bac Ninh'
+		} ];
+
+		
+	});
+	</script>
 </body>
+
 </html>
